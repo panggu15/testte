@@ -2,6 +2,7 @@ import os
 import torch
 from torch.utils.data import DataLoader
 from dicom_nii_2d_dataset import DicomNii2DDataset
+from score import evaluate_model
 
 import albumentations as A
 
@@ -41,8 +42,7 @@ model = smp.Unet(
 ).to(device)
 
 # state_dict 로드
-# model.load_state_dict(torch.load(args.model_path, map_location=device, weights_only=False))
-model.load_state_dict(torch.load("알파코_model_complete_state_dict_0010.pth", map_location=device, weights_only=False))
+model.load_state_dict(torch.load(args.model_path, map_location=device, weights_only=False))
 
 def evaluate(model, dataloader, device):
     """
