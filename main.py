@@ -190,7 +190,7 @@ train_dataloader = DataLoader(
 
 valid_dataset = DicomNii2DDataset(os.path.join(args.data_path, "breast"), test_transform)
 valid_dataloader = DataLoader(
-    valid_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2
+    valid_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=2
 )
 
 model = smp.Unet(
