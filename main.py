@@ -54,7 +54,7 @@ test_transform = A.Compose(
         A.Normalize(),
     ]
 )
-
+import copy
 def train(model, num_epochs, dataloader, valid_loader, optimizer, criterion, device, scheduler=None):
     """
     모델 학습
@@ -127,7 +127,7 @@ def train(model, num_epochs, dataloader, valid_loader, optimizer, criterion, dev
         
         if best_score < valid_gds:
             best_score = valid_gds
-            best_model = model.copy()
+            best_model = copy.deepcopy(model)
         
         if scheduler is not None:
             scheduler.step(epoch_loss)
