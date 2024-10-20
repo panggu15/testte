@@ -222,3 +222,8 @@ torch.save(
     best_model.state_dict(),  # 저장할 모델의 상태 딕셔너리
     f"{today_date_str}_{team}_model_complete_state_dict_{num_epochs:04}.pth",
 )
+
+torch.save(
+    best_model.state_dict(),  # 저장할 모델의 상태 딕셔너리
+    f"{team}_model_complete_state_dict_{num_epochs:04}.pth",
+)
