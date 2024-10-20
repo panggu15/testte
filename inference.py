@@ -44,7 +44,43 @@ model = smp.Unet(
 # model.load_state_dict(torch.load(args.model_path, map_location=device, weights_only=False))
 model.load_state_dict(torch.load("알파코_model_complete_state_dict_0010.pth", map_location=device, weights_only=False))
 
-from main import evaluate
+def evaluate(model, dataloader, device):
+    """
+    모델 평가
+    """
+
+    model.eval()
+
+    #
+    inference_gds = 0.0
+    inference_miou = 0.0
+
+    with torch.no_grad():
+        for images, masks in dataloader:
+            images = images.float().to(device)
+            images = images.unsqueeze(1)  # bhw to b1hw
+
+            masks = masks.float().to(device)
+            masks = masks.unsqueeze(1)  # bhw to b1hw
+
+            # 모델 예측
+            outputs = model(images)
+
+            # 점수 계산
+            gds, miou = evaluate_model(outputs, masks, device)
+            inference_gds += gds
+            inference_miou += miou
+
+        length = len(dataloader)
+
+        # gds
+        epoch_gds = inference_gds / length
+
+        # miou
+        epoch_miou = inference_miou / length
+
+    print(f"GDS: {epoch_gds:.8f}, mIoU: {epoch_miou:.8f}")
+    return epoch_gds, epoch_miou
 
 # 평가
 evaluate(model, test_dataloader, device)
