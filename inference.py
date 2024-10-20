@@ -33,7 +33,7 @@ test_dataloader = DataLoader(
 )
 
 model = smp.Unet(
-    encoder_name="resnext50_32x4d",  # Encoder로 ResNet34 사용
+    encoder_name="resnext50_32x4d",  # Encoder로 resnext50_32x4d 사용
     encoder_weights="imagenet",  # 사전 학습된 가중치 사용
     in_channels=1,  # 입력 채널 수 (흑백 이미지)
     classes=1  # 출력 채널 수 (이진 분할이므로 1)
