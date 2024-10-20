@@ -127,7 +127,7 @@ def train(model, num_epochs, dataloader, valid_loader, optimizer, criterion, dev
         
         if best_score < valid_gds:
             best_score = valid_gds
-            best_model = model
+            best_model = model.copy()
         
         if scheduler is not None:
             scheduler.step(epoch_loss)
