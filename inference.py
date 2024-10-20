@@ -41,7 +41,8 @@ model = smp.Unet(
 ).to(device)
 
 # state_dict 로드
-model.load_state_dict(torch.load(args.model_path, map_location=device, weights_only=False))
+# model.load_state_dict(torch.load(args.model_path, map_location=device, weights_only=False))
+model.load_state_dict(torch.load("알파코_model_complete_state_dict_0010.pth", map_location=device, weights_only=False))
 
 from main import evaluate
 
