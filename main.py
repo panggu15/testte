@@ -14,6 +14,7 @@ from albumentations import Compose
 import segmentation_models_pytorch as smp
 from score import evaluate_model
 
+import copy
 import argparse
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -54,7 +55,7 @@ test_transform = A.Compose(
         A.Normalize(),
     ]
 )
-import copy
+
 def train(model, num_epochs, dataloader, valid_loader, optimizer, criterion, device, scheduler=None):
     """
     모델 학습
